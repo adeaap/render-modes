@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-server: var(--server);
+  --color-client: var(--client);
+  --color-static: var(--static);
+  --color-dynamic: var(--dynamic);
+  --color-isr: var(--isr);
+  --color-rsc: var(--rsc);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --animate-pulse-x: pulse-x 2.4s ease-in-out infinite;
+  --animate-pulse-y: pulse-y 2.4s ease-in-out infinite;
+  --animate-flow: flow 1.6s linear infinite;
+  --animate-paint-sweep: paint-sweep 2.6s ease-in-out infinite;
+  --animate-handshake: handshake 3.2s ease-in-out infinite;
+  --animate-spark: spark 1.6s ease-out infinite;
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-grow: grow 0.6s ease-out;
+  --animate-blink: blink 1s steps(2, end) infinite;
+}
+
+:root {
+  --background: #fafafa;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --border: #e4e4e7;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+  --accent: #6366f1;
+  --accent-foreground: #ffffff;
+  --server: #7c3aed;
+  --client: #059669;
+  --static: #0284c7;
+  --dynamic: #d97706;
+  --isr: #db2777;
+  --rsc: #0d9488;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #09090b;
+    --foreground: #fafafa;
+    --card: #18181b;
+    --card-foreground: #fafafa;
+    --border: #27272a;
+    --muted: #1c1c1f;
+    --muted-foreground: #a1a1aa;
+    --accent: #818cf8;
+    --accent-foreground: #0b0b10;
+    --server: #a78bfa;
+    --client: #34d399;
+    --static: #38bdf8;
+    --dynamic: #fbbf24;
+    --isr: #f472b6;
+    --rsc: #2dd4bf;
+  }
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 30%, transparent);
+}
+
+@keyframes pulse-x {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(var(--pulse-distance, 100%));
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-y {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--pulse-distance, 100%));
+    opacity: 0;
+  }
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes paint-sweep {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(110%);
+  }
+}
+
+@keyframes handshake {
+  0% {
+    opacity: 0;
+    transform: translateX(-30%);
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(30%);
+  }
+}
+
+@keyframes spark {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--border) 60%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--border) 60%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
