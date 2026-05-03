@@ -15,20 +15,20 @@ Twelve phases, in order:
 
 `address` → `connection` → `http` → `html-parsing` → `css-parsing` → `javascript` → `dom` → `render-tree` → `layout` → `paint` → `composite` → `hydration`
 
-Each phase has its own animated diagram and a dedicated route under `/lifecycle/[phase]`. The phase definitions live in [app/_lib/phases.tsx](app/_lib/phases.tsx); the per-phase animations are in [app/lifecycle/[phase]/_components/](app/lifecycle/%5Bphase%5D/_components/).
+Each phase has its own animated diagram and a dedicated route under `/lifecycle/[phase]`. The phase definitions live in [app/\_lib/phases.tsx](app/_lib/phases.tsx); the per-phase animations are in [app/lifecycle/[phase]/\_components/](app/lifecycle/%5Bphase%5D/_components/).
 
 ### 2. Rendering modes — `/rendering`
 
 Six routes, each demonstrating one strategy:
 
-| Route | What it shows |
-| --- | --- |
-| [`/rendering/csr`](app/rendering/csr/page.tsx) | Client-side rendering — the server ships an empty shell, the browser fetches the data and paints. |
-| [`/rendering/ssr`](app/rendering/ssr/page.tsx) | Server-side rendering — the page is rendered fresh on every request. |
-| [`/rendering/ssg`](app/rendering/ssg/page.tsx) | Static generation — rendered once at build time, frozen forever. |
-| [`/rendering/isr`](app/rendering/isr/page.tsx) | Incremental static regeneration — static, but regenerated every 10 seconds. |
-| [`/rendering/rsc`](app/rendering/rsc/page.tsx) | React Server Components — server-only components, with `"use client"` islands. |
-| [`/rendering/hydration`](app/rendering/hydration/page.tsx) | Hydration — HTML lands first, JS attaches event listeners afterward. |
+| Route                                                      | What it shows                                                                                     |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [`/rendering/csr`](app/rendering/csr/page.tsx)             | Client-side rendering — the server ships an empty shell, the browser fetches the data and paints. |
+| [`/rendering/ssr`](app/rendering/ssr/page.tsx)             | Server-side rendering — the page is rendered fresh on every request.                              |
+| [`/rendering/ssg`](app/rendering/ssg/page.tsx)             | Static generation — rendered once at build time, frozen forever.                                  |
+| [`/rendering/isr`](app/rendering/isr/page.tsx)             | Incremental static regeneration — static, but regenerated every 10 seconds.                       |
+| [`/rendering/rsc`](app/rendering/rsc/page.tsx)             | React Server Components — server-only components, with `"use client"` islands.                    |
+| [`/rendering/hydration`](app/rendering/hydration/page.tsx) | Hydration — HTML lands first, JS attaches event listeners afterward.                              |
 
 The CSR demo is backed by [app/api/now/route.ts](app/api/now/route.ts).
 
@@ -59,18 +59,18 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command | What it does |
-| --- | --- |
-| `npm run dev` | Dev server (caching bypassed). |
-| `npm run build` | Production build. |
-| `npm start` | Serve the production build. |
-| `npm run lint` | ESLint. |
-| `npm run typecheck` | `tsc --noEmit`. |
-| `npm run format` / `npm run format:check` | Prettier write / check. |
-| `npm run test:e2e` | Playwright across all profiles. |
-| `npm run test:e2e:dev` | Playwright against the dev server. |
-| `npm run test:e2e:prod` | Playwright against a production build. |
-| `npm run test:e2e:ui` | Playwright UI mode (dev profile). |
+| Command                                   | What it does                           |
+| ----------------------------------------- | -------------------------------------- |
+| `npm run dev`                             | Dev server (caching bypassed).         |
+| `npm run build`                           | Production build.                      |
+| `npm start`                               | Serve the production build.            |
+| `npm run lint`                            | ESLint.                                |
+| `npm run typecheck`                       | `tsc --noEmit`.                        |
+| `npm run format` / `npm run format:check` | Prettier write / check.                |
+| `npm run test:e2e`                        | Playwright across all profiles.        |
+| `npm run test:e2e:dev`                    | Playwright against the dev server.     |
+| `npm run test:e2e:prod`                   | Playwright against a production build. |
+| `npm run test:e2e:ui`                     | Playwright UI mode (dev profile).      |
 
 ## Testing
 
