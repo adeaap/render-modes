@@ -1,0 +1,63 @@
+name: Nightly E2E (prod profile)
+
+on:
+  schedule:
+    # 06:00 UTC daily — keeps the slow ISR wall-clock test off the PR path.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  e2e-prod:
+    name: E2E (prod profile)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright system deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      # The prod profile's webServer runs `npm run build && next start -p 3100`
+      # automatically, so no separate build step is needed.
+      - run: npm run test:e2e:prod
+        env:
+          CI: "true"
+
+      - name: Upload Playwright report
+        if: always() && !cancelled()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-prod
+          path: playwright-report/
+          retention-days: 30
+          if-no-files-found: ignore
+
+      - name: Upload test artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-prod
+          path: test-results/
+          retention-days: 30
+          if-no-files-found: ignore
