@@ -2,6 +2,8 @@
 
 > How a web page actually shows up.
 
+**Live demo: [rendermodes.com](https://www.rendermodes.com/)**
+
 An interactive walkthrough of how a page reaches the screen, in two modules:
 
 1. **The browser rendering lifecycle** — twelve animated phases from URL bar to interactive page.
@@ -110,4 +112,12 @@ e2e/                       Playwright suites and fixtures
 
 ## Conventions
 
-Project-specific conventions — Suspense boundaries under `cacheComponents`, `params`/`searchParams` as Promises, no request-time APIs inside `'use cache'`, pure SVG/CSS animations, `prefers-reduced-motion` honoured globally, Husky pre-push that runs typecheck + lint + build — are documented in [AGENTS.md](AGENTS.md). Read it before opening a PR.
+Project-specific conventions — Suspense boundaries under `cacheComponents`, `params`/`searchParams` as Promises, no request-time APIs inside `'use cache'`, pure SVG/CSS animations, `prefers-reduced-motion` honoured globally, Husky pre-push that runs typecheck + lint + build — are documented in [AGENTS.md](AGENTS.md).
+
+## Contributions
+
+This is a personal showcase project. Issues are disabled and PRs are not actively reviewed, feel free to fork if you want to build on it. Security reports are welcome via [SECURITY.md](SECURITY.md).
+
+## License
+
+Released under the [MIT License](LICENSE).
